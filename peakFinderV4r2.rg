@@ -178,8 +178,8 @@ do
   -- c.printf("p_data.bounds.lo.x:%d, p_data.bounds.hi.x:%d\n",peaks.bounds.lo.x, peaks.bounds.hi.x)
   var r_conmap = region(ispace(int2d, {HEIGHT, WIDTH}), uint32)
 	for p_i = peaks.bounds.lo.x, peaks.bounds.hi.x + 1 do
-    -- var i = [uint32](p_i) % (EVENTS * SHOTS)
-    var i = p_i
+    var i = [uint32](p_i) % (EVENTS * SHOTS)
+    -- var i = p_i
     var thr_high = r_thr_high[p_i]
     var thr_low = r_thr_low[p_i]
     var shot_count = 0   

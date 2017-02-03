@@ -5,6 +5,7 @@ local Peak = require("peak")
 sqrt = terralib.intrinsic("llvm.sqrt.f64", double -> double)
 
 struct PeakHelper {
+	seg  : int;
     npix : int;
     samp : double;
     sac1 : double;
@@ -24,12 +25,13 @@ struct PeakHelper {
     HEIGHT : int;
 }
 
-terra PeakHelper:init(r0 : int, c0 :int, a0 : double, bg_avg : double, bg_rms : double, WIDTH : int, HEIGHT : int)
+terra PeakHelper:init(r0 : int, c0 :int, a0 : double, bg_avg : double, bg_rms : double, seg : double, WIDTH : int, HEIGHT : int)
 	self.r0 = r0
 	self.c0 = c0
 	self.a0 = a0
 	self.bg_avg = bg_avg
 	self.bg_rms = bg_rms
+	self.seg = seg
 	self.WIDTH = WIDTH
 	self.HEIGHT = HEIGHT
 	self.npix = 0
@@ -50,8 +52,8 @@ terra PeakHelper:add_point(intensity : double, row : int, col : int)
 	var c : int = col
 	if r < self.rmin then self.rmin = r end
 	if r > self.rmax then self.rmax = r end
-	if r < self.cmin then self.cmin = r end
-	if r > self.cmax then self.cmax = r end
+	if c < self.cmin then self.cmin = c end
+	if c > self.cmax then self.cmax = c end
 
 	self.npix = self.npix + 1
 	self.samp = self.samp + a
@@ -67,6 +69,7 @@ end
 
 terra PeakHelper:get_peak()
 	var peak : Peak
+	peak.seg = self.seg
 	peak.row = self.r0
 	peak.col = self.c0
 	peak.npix = self.npix

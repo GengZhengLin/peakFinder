@@ -137,7 +137,7 @@ do
   queue:init()
 	var index : uint32
 	index = 0
-	c.printf("p_points.bounds.lo.x:%d, p_points.bounds.hi.x: %d\n",p_points.bounds.lo.x,p_points.bounds.hi.x)
+	-- c.printf("p_points.bounds.lo.x:%d, p_points.bounds.hi.x: %d\n",p_points.bounds.lo.x,p_points.bounds.hi.x)
 	for i = p_points.bounds.lo.x, p_points.bounds.hi.x + 1 do
 		var event = [uint32](i / SHOTS) % EVENTS
     var shot_count = 0

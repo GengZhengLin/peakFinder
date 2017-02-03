@@ -1,0 +1,451 @@
+kinit: KDC can't fulfill requested option while renewing credentials
+--------------------------------------------------------------------------
+No OpenFabrics connection schemes reported that they were able to be
+used on a specific port.  As such, the openib BTL (OpenFabrics
+support) will be disabled for this port.
+
+  Local host:           psana1606
+  Local device:         mlx4_0
+  Local port:           2
+  CPCs attempted:       udcm
+--------------------------------------------------------------------------
+Loading in 64 batches
+Processing in 64 batches
+Loading test200.bin into panels 0 through 6399
+[psana1602:27462] 3 more processes have sent help message help-mpi-btl-openib-cpc-base.txt / no cpcs for port
+[psana1602:27462] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+load data finished
+Loading took 51.6094 seconds
+Processing took 5.5250 seconds
+In event 0 there were 0 peaks
+
+In event 1 there were 2 peaks
+
+In event 2 there were 4 peaks
+
+In event 3 there were 4 peaks
+
+In event 4 there were 0 peaks
+
+In event 5 there were 6 peaks
+
+In event 6 there were 2 peaks
+
+In event 7 there were 8 peaks
+
+In event 8 there were 0 peaks
+
+In event 9 there were 3 peaks
+
+In event 10 there were 5 peaks
+
+In event 11 there were 1 peaks
+
+In event 12 there were 3 peaks
+
+In event 13 there were 4 peaks
+
+In event 14 there were 6 peaks
+
+In event 15 there were 6 peaks
+
+In event 16 there were 2 peaks
+
+In event 17 there were 5 peaks
+
+In event 18 there were 1 peaks
+
+In event 19 there were 8 peaks
+
+In event 20 there were 1 peaks
+
+In event 21 there were 4 peaks
+
+In event 22 there were 2 peaks
+
+In event 23 there were 1 peaks
+
+In event 24 there were 4 peaks
+
+In event 25 there were 1 peaks
+
+In event 26 there were 2 peaks
+
+In event 27 there were 0 peaks
+
+In event 28 there were 3 peaks
+
+In event 29 there were 1 peaks
+
+In event 30 there were 8 peaks
+
+In event 31 there were 4 peaks
+
+In event 32 there were 0 peaks
+
+In event 33 there were 6 peaks
+
+In event 34 there were 0 peaks
+
+In event 35 there were 3 peaks
+
+In event 36 there were 0 peaks
+
+In event 37 there were 5 peaks
+
+In event 38 there were 3 peaks
+
+In event 39 there were 0 peaks
+
+In event 40 there were 8 peaks
+
+In event 41 there were 1 peaks
+
+In event 42 there were 3 peaks
+
+In event 43 there were 2 peaks
+
+In event 44 there were 0 peaks
+
+In event 45 there were 3 peaks
+
+In event 46 there were 0 peaks
+
+In event 47 there were 8 peaks
+
+In event 48 there were 3 peaks
+
+In event 49 there were 4 peaks
+
+In event 50 there were 1 peaks
+
+In event 51 there were 7 peaks
+
+In event 52 there were 0 peaks
+
+In event 53 there were 7 peaks
+
+In event 54 there were 4 peaks
+
+In event 55 there were 0 peaks
+
+In event 56 there were 2 peaks
+
+In event 57 there were 3 peaks
+
+In event 58 there were 2 peaks
+
+In event 59 there were 4 peaks
+
+In event 60 there were 0 peaks
+
+In event 61 there were 10 peaks
+
+In event 62 there were 0 peaks
+
+In event 63 there were 2 peaks
+
+In event 64 there were 1 peaks
+
+In event 65 there were 3 peaks
+
+In event 66 there were 6 peaks
+
+In event 67 there were 2 peaks
+
+In event 68 there were 8 peaks
+
+In event 69 there were 0 peaks
+
+In event 70 there were 6 peaks
+
+In event 71 there were 4 peaks
+
+In event 72 there were 4 peaks
+
+In event 73 there were 2 peaks
+
+In event 74 there were 2 peaks
+
+In event 75 there were 5 peaks
+
+In event 76 there were 0 peaks
+
+In event 77 there were 5 peaks
+
+In event 78 there were 0 peaks
+
+In event 79 there were 2 peaks
+
+In event 80 there were 1 peaks
+
+In event 81 there were 1 peaks
+
+In event 82 there were 11 peaks
+
+In event 83 there were 0 peaks
+
+In event 84 there were 6 peaks
+
+In event 85 there were 1 peaks
+
+In event 86 there were 3 peaks
+
+In event 87 there were 6 peaks
+
+In event 88 there were 2 peaks
+
+In event 89 there were 1 peaks
+
+In event 90 there were 0 peaks
+
+In event 91 there were 1 peaks
+
+In event 92 there were 5 peaks
+
+In event 93 there were 1 peaks
+
+In event 94 there were 4 peaks
+
+In event 95 there were 1 peaks
+
+In event 96 there were 5 peaks
+
+In event 97 there were 3 peaks
+
+In event 98 there were 1 peaks
+
+In event 99 there were 3 peaks
+
+In event 100 there were 0 peaks
+
+In event 101 there were 7 peaks
+
+In event 102 there were 1 peaks
+
+In event 103 there were 4 peaks
+
+In event 104 there were 0 peaks
+
+In event 105 there were 4 peaks
+
+In event 106 there were 0 peaks
+
+In event 107 there were 1 peaks
+
+In event 108 there were 4 peaks
+
+In event 109 there were 4 peaks
+
+In event 110 there were 6 peaks
+
+In event 111 there were 1 peaks
+
+In event 112 there were 4 peaks
+
+In event 113 there were 5 peaks
+
+In event 114 there were 0 peaks
+
+In event 115 there were 11 peaks
+
+In event 116 there were 2 peaks
+
+In event 117 there were 5 peaks
+
+In event 118 there were 4 peaks
+
+In event 119 there were 1 peaks
+
+In event 120 there were 6 peaks
+
+In event 121 there were 6 peaks
+
+In event 122 there were 5 peaks
+
+In event 123 there were 3 peaks
+
+In event 124 there were 4 peaks
+
+In event 125 there were 3 peaks
+
+In event 126 there were 2 peaks
+
+In event 127 there were 2 peaks
+
+In event 128 there were 4 peaks
+
+In event 129 there were 2 peaks
+
+In event 130 there were 4 peaks
+
+In event 131 there were 2 peaks
+
+In event 132 there were 5 peaks
+
+In event 133 there were 7 peaks
+
+In event 134 there were 0 peaks
+
+In event 135 there were 7 peaks
+
+In event 136 there were 4 peaks
+
+In event 137 there were 4 peaks
+
+In event 138 there were 1 peaks
+
+In event 139 there were 5 peaks
+
+In event 140 there were 4 peaks
+
+In event 141 there were 5 peaks
+
+In event 142 there were 0 peaks
+
+In event 143 there were 9 peaks
+
+In event 144 there were 0 peaks
+
+In event 145 there were 2 peaks
+
+In event 146 there were 2 peaks
+
+In event 147 there were 5 peaks
+
+In event 148 there were 2 peaks
+
+In event 149 there were 4 peaks
+
+In event 150 there were 1 peaks
+
+In event 151 there were 3 peaks
+
+In event 152 there were 0 peaks
+
+In event 153 there were 3 peaks
+
+In event 154 there were 4 peaks
+
+In event 155 there were 7 peaks
+
+In event 156 there were 1 peaks
+
+In event 157 there were 6 peaks
+
+In event 158 there were 1 peaks
+
+In event 159 there were 5 peaks
+
+In event 160 there were 3 peaks
+
+In event 161 there were 3 peaks
+
+In event 162 there were 7 peaks
+
+In event 163 there were 2 peaks
+
+In event 164 there were 1 peaks
+
+In event 165 there were 1 peaks
+
+In event 166 there were 6 peaks
+
+In event 167 there were 4 peaks
+
+In event 168 there were 1 peaks
+
+In event 169 there were 6 peaks
+
+In event 170 there were 1 peaks
+
+In event 171 there were 2 peaks
+
+In event 172 there were 0 peaks
+
+In event 173 there were 3 peaks
+
+In event 174 there were 2 peaks
+
+In event 175 there were 1 peaks
+
+In event 176 there were 4 peaks
+
+In event 177 there were 0 peaks
+
+In event 178 there were 2 peaks
+
+In event 179 there were 0 peaks
+
+In event 180 there were 1 peaks
+
+In event 181 there were 0 peaks
+
+In event 182 there were 6 peaks
+
+In event 183 there were 2 peaks
+
+In event 184 there were 0 peaks
+
+In event 185 there were 4 peaks
+
+In event 186 there were 0 peaks
+
+In event 187 there were 1 peaks
+
+In event 188 there were 8 peaks
+
+In event 189 there were 0 peaks
+
+In event 190 there were 6 peaks
+
+In event 191 there were 2 peaks
+
+In event 192 there were 2 peaks
+
+In event 193 there were 10 peaks
+
+In event 194 there were 2 peaks
+
+In event 195 there were 6 peaks
+
+In event 196 there were 0 peaks
+
+In event 197 there were 4 peaks
+
+In event 198 there were 2 peaks
+
+In event 199 there were 3 peaks
+
+
+------------------------------------------------------------
+Sender: LSF System <lsf@psana1602.pcdsn>
+Subject: Job 47449: <LAUNCHER='mpirun --bind-to none -np 4 -npernode 1' python /reg/neh/home/zhenglin/legion/language/regent.py peakFinder.rg -p 64 -ll:csize 10000> in cluster <slac> Done
+
+Job <LAUNCHER='mpirun --bind-to none -np 4 -npernode 1' python /reg/neh/home/zhenglin/legion/language/regent.py peakFinder.rg -p 64 -ll:csize 10000> was submitted from host <psanaphi110.pcdsn> by user <zhenglin> in cluster <slac>.
+Job was executed on host(s) <16*psana1602>, in queue <psfehq>, as user <zhenglin> in cluster <slac>.
+                            <16*psana1606>
+                            <16*psana1607>
+                            <16*psana1608>
+</reg/neh/home/zhenglin> was used as the home directory.
+</reg/neh/home/zhenglin/Code/peakFinder> was used as the working directory.
+Started at Wed Feb  1 12:51:32 2017
+Results reported on Wed Feb  1 12:52:40 2017
+Cannot open your job file: /reg/neh/home/zhenglin/.lsbatch/1485982290.47449
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   317.62 sec.
+    Max Memory :                                 3571 MB
+    Average Memory :                             3310.00 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              6
+    Max Threads :                                30
+    Run time :                                   67 sec.
+    Turnaround time :                            70 sec.
+
+The output (if any) is above this job summary.
+
