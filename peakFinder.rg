@@ -76,6 +76,29 @@ do
   return 0
 end
 
+task parallel_load_data(r_data : region(ispace(int3d), Pixel))
+where reads writes (r_data)
+do
+  var sizeofFloat : int = 4
+  var offset = (r_data.bounds.lo.z) * WIDTH * HEIGHT * sizeofFloat
+  var f = c.fopen(data_file, "rb")
+  c.fseek(f,offset,c.SEEK_SET)
+  var x : float[1]
+  -- c.printf("r_data.bounds.lo.z, r_data.bounds.hi.z + 1 = %d, %d\n",r_data.bounds.lo.z, r_data.bounds.hi.z + 1)
+  for i = r_data.bounds.lo.z, r_data.bounds.hi.z + 1 do
+    for row = 0, HEIGHT do
+      for col = 0, WIDTH do
+        if not read_float(f, x) then
+          c.printf("Couldn't read data in shot %d\n", row)
+          return -1
+        end
+        r_data[{col,row,i}].cspad = x[0]
+      end
+    end
+  end
+  return 0
+end
+
 task printPeaks(r_peaks : region(ispace(int3d), Peak))
 where
   reads(r_peaks)
@@ -142,19 +165,20 @@ task main()
 	c.printf("Processing in %d batches\n", config.parallelism)
 
   var r_data = region(ispace(int3d, {WIDTH, HEIGHT, EVENTS * SHOTS}), Pixel)
-  var ts_start = c.legion_get_current_time_in_micros()
-  var is = ispace(int1d, EVENTS * SHOTS)
-  do
-    var _ = load_data(r_data)
-    wait_for(_)
-  end
-  var ts_stop = c.legion_get_current_time_in_micros()
-  c.printf("Loading took %.4f seconds\n", (ts_stop - ts_start) * 1e-6)
-  
   var p_data = partition(equal, r_data, p_colors)
-
+  var is = ispace(int1d, EVENTS * SHOTS)
+  -- load data
+  var ts_start = c.legion_get_current_time_in_micros()
+  c.printf("Start sending out tasks at %.4f\n", (ts_start) * 1e-6)
+  do
+    for color in p_data.colors do
+      parallel_load_data(p_data[color])
+    end
+  end
+  
+  -- process data
   ts_start = c.legion_get_current_time_in_micros()
-  c.printf("Start sending out tasks at %.4f\n", (ts_stop - ts_start) * 1e-6)
+  c.printf("Start sending out tasks at %.4f\n", (ts_start) * 1e-6)
   __demand(__spmd)
   do
     -- _+=AlImgProc.peakFinderV4r2(r_data, r_peaks, is, 4, m_win, THR_HIGH, THR_LOW, r0, dr)
@@ -167,7 +191,7 @@ task main()
   -- c.printf("Processing took %.4f seconds\n", (ts_stop - ts_start) * 1e-6)
   
   printPeaks(r_peaks)
-  -- writePeaks(r_peaks)
+  writePeaks(r_peaks)
 
   -- AlImgProc.writePeaks(r_peaks)
 

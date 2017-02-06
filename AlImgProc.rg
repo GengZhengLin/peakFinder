@@ -198,7 +198,7 @@ do
 		end
 	end
 	var ts_stop = c.legion_get_current_time_in_micros()
-  c.printf("Task: (%d - %d) starts from %.4f, ends at %.4f\n", peaks.bounds.lo.z, peaks.bounds.hi.z + 1, (ts_start) * 1e-6, (ts_stop) * 1e-6)
+  c.printf("peakFinderTask: (%d - %d) starts from %.4f, ends at %.4f\n", peaks.bounds.lo.z, peaks.bounds.hi.z + 1, (ts_start) * 1e-6, (ts_stop) * 1e-6)
 	return 0
 end
 
