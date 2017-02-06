@@ -17,7 +17,7 @@ end
 
 terra Queue:dequeue() 
     if self.length <= 0 then
-        c.printf("Dequeueing point from queue that is empty\n")
+        -- c.printf("Dequeueing point from queue that is empty\n")
     end
     
     var toRet = self.entries[self.curr]
@@ -28,7 +28,7 @@ end
 
 terra Queue:enqueue(p : int3d) 
     if self.length >= DIAMETER * DIAMETER then
-        c.printf("Adding point to queue that is full\n")
+        -- c.printf("Adding point to queue that is full\n")
     end
     
     self.entries[(self.curr + self.length) % (DIAMETER * DIAMETER)] = p

@@ -10,7 +10,7 @@ args = parser.parse_args()
 
 filename = '/reg/d/psdm/cxi/cxitut13/scratch/cpo/test_bigh5.h5'
 # filename = '../h5data/small_test.h5'
-converted_file = 'test{0}.bin'.format(args.events)
+converted_file = '/reg/d/psdm/cxi/cxitut13/scratch/cpo/test{0}.bin'.format(args.events)
 
 fr = h5py.File(filename,'r')
 cspad = fr['cspad']

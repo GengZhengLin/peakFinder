@@ -2,7 +2,8 @@ import "regent"
 
 local c = regentlib.c
 local Peak = require("peak")
-sqrt = terralib.intrinsic("llvm.sqrt.f64", double -> double)
+local sqrt = regentlib.sqrt(double)
+
 
 struct PeakHelper {
 	seg  : int;

@@ -22,9 +22,9 @@ def run_peafFinder():
 	nodes = args.nodes
 	log_file = "log/log_{0}".format(nodes)
 	if args.py:
-		command = "bsub -q psfehq -n {1} -o {0}  \"LAUNCHER='mpirun --bind-to none -np {2} -npernode 1' python benchmark_peakFInder.py\"".format(log_file, nodes*16, nodes)
+		command = "bsub -q psfehq -n {1} -o {0}_py  \"mpirun -n {1} python benchmark_peakFInder.py\"".format(log_file, nodes*16)
 	else:
-		command = "bsub -q psfehq -n {1} -o {0}  \"LAUNCHER='mpirun --bind-to none -np {2} -npernode 1' python /reg/neh/home/zhenglin/legion/language/regent.py peakFinder.rg -p {1} -ll:csize 10000\"".format(log_file, nodes*16, nodes)
+		command = "bsub -q psfehq -n {1} -o {0}  \"LAUNCHER='mpirun --bind-to none -np {2} -npernode 1' python /reg/neh/home/zhenglin/legion/language/regent.py peakFinder.rg -p {1} -ll:csize 40000\"".format(log_file, nodes*16, nodes)
 	print(command)
 # os.system(command)
 

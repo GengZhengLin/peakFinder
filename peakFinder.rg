@@ -16,8 +16,9 @@ hdf5.H5T_STD_I64LE = hdf5.H5T_STD_I64LE_g
 hdf5.H5T_IEEE_F64LE = hdf5.H5T_IEEE_F64LE_g
 hdf5.H5P_DEFAULT = 0
 
-local EVENTS = 5
--- local EVENTS = 200
+-- local EVENTS = 5
+local EVENTS = 6000
+-- local EVENTS = 1000
 local SHOTS = 32
 local HEIGHT = 185
 local WIDTH = 388
@@ -28,8 +29,8 @@ local dr = 0.05
 local THR_LOW = 10
 local THR_HIGH = 150
 -- local data_file = "test3.bin"
-local data_file = "small_test"
--- local data_file = "../data/test200.bin"
+local data_file = "/reg/d/psdm/cxi/cxitut13/scratch/cpo/test6000.bin"
+-- local data_file = "/reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin"
 local h5_data_file = "small_test_resized.h5"
 
 task print_region(r : region(ispace(int3d), Pixel))
@@ -80,15 +81,15 @@ do
     var count = 0
     for shot = 0, SHOTS do
       for i = 0, MAX_PEAKS do
-        var peak : Peak = r_peaks[{SHOTS * event + shot, i, 0}]
-        if peak.valid and shot == 1 then --break 
+        var peak : Peak = r_peaks[{0, i, SHOTS * event + shot}]
+        if peak.valid then --break 
           count += 1
           -- c.printf("%3d %4d  %4d  %4d  %8.1lf\n",
           -- [int](peak.seg), [int](peak.row), [int](peak.col), [int](peak.npix), peak.amp_tot)
         end
       end
     end
-    c.printf("In event %d there were %d peaks\n\n", event, count)
+    c.printf("In event %d there were %d peaks\n", event, count)
   end
 end
 
@@ -162,6 +163,7 @@ task main()
 
   var r_data = region(ispace(int3d, {WIDTH, HEIGHT, EVENTS * SHOTS}), Pixel)
   var ts_start = c.legion_get_current_time_in_micros()
+  var is = ispace(int1d, EVENTS * SHOTS)
   do
     var _ = load_data(r_data)
     wait_for(_)
@@ -174,6 +176,7 @@ task main()
   ts_start = c.legion_get_current_time_in_micros()
   do
     var _ = 0
+    -- _+=AlImgProc.peakFinderV4r2(r_data, r_peaks, is, 4, m_win, THR_HIGH, THR_LOW, r0, dr)
     for color in p_data.colors do
       _ += AlImgProc.peakFinderV4r2(p_data[color], p_peaks[color], 4, m_win, THR_HIGH, THR_LOW, r0, dr)
     end
@@ -183,8 +186,8 @@ task main()
   ts_stop = c.legion_get_current_time_in_micros()
   c.printf("Processing took %.4f seconds\n", (ts_stop - ts_start) * 1e-6)
   
-  -- printPeaks(r_peaks)
-  writePeaks(r_peaks)
+  printPeaks(r_peaks)
+  -- writePeaks(r_peaks)
   
 
   -- AlImgProc.writePeaks(r_peaks)
