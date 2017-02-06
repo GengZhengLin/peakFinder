@@ -77,6 +77,7 @@ task AlImgProc.peakFinderV4r2(data : region(ispace(int3d), Pixel), peaks : regio
 where
 	reads (data), writes(peaks)
 do
+  var ts_start = c.legion_get_current_time_in_micros()
 	var index : uint32 = 0
   var half_width : int = [int](r0 + dr)
   -- c.printf("p_data.bounds.lo.x:%d, p_data.bounds.hi.x:%d\n",peaks.bounds.lo.x, peaks.bounds.hi.x)
@@ -196,7 +197,8 @@ do
 			end
 		end
 	end
-	
+	var ts_stop = c.legion_get_current_time_in_micros()
+  c.printf("Task: (%d - %d) starts from %.4f, ends at %.4f\n", peaks.bounds.lo.z, peaks.bounds.hi.z + 1, (ts_start) * 1e-6, (ts_stop) * 1e-6)
 	return 0
 end
 

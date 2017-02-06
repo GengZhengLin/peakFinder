@@ -17,7 +17,7 @@ hdf5.H5T_IEEE_F64LE = hdf5.H5T_IEEE_F64LE_g
 hdf5.H5P_DEFAULT = 0
 
 -- local EVENTS = 5
-local EVENTS = 6000
+
 -- local EVENTS = 1000
 local SHOTS = 32
 local HEIGHT = 185
@@ -28,10 +28,14 @@ local r0 = 5
 local dr = 0.05
 local THR_LOW = 10
 local THR_HIGH = 150
--- local data_file = "test3.bin"
-local data_file = "/reg/d/psdm/cxi/cxitut13/scratch/cpo/test6000.bin"
--- local data_file = "/reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin"
-local h5_data_file = "small_test_resized.h5"
+-- clustter test
+-- local EVENTS = 6000
+-- local data_file = "/reg/d/psdm/cxi/cxitut13/scratch/cpo/test6000.bin"
+
+-- local test
+local EVENTS = 5
+local data_file = "small_test"
+
 
 task print_region(r : region(ispace(int3d), Pixel))
 where
@@ -67,7 +71,6 @@ do
         r_shots[{col,row,i}].cspad = x[0]
       end
     end
-    -- c.printf('%f ', r_shots[{i,0,0}].cspad)
   end
   c.printf('load data finished\n')
   return 0
@@ -151,17 +154,17 @@ task main()
   var p_data = partition(equal, r_data, p_colors)
 
   ts_start = c.legion_get_current_time_in_micros()
+  c.printf("Start sending out tasks at %.4f\n", (ts_stop - ts_start) * 1e-6)
+  __demand(__spmd)
   do
-    var _ = 0
     -- _+=AlImgProc.peakFinderV4r2(r_data, r_peaks, is, 4, m_win, THR_HIGH, THR_LOW, r0, dr)
     for color in p_data.colors do
-      _ += AlImgProc.peakFinderV4r2(p_data[color], p_peaks[color], 4, m_win, THR_HIGH, THR_LOW, r0, dr)
+      AlImgProc.peakFinderV4r2(p_data[color], p_peaks[color], 4, m_win, THR_HIGH, THR_LOW, r0, dr)
     end
-    wait_for(_)
   end
 
-  ts_stop = c.legion_get_current_time_in_micros()
-  c.printf("Processing took %.4f seconds\n", (ts_stop - ts_start) * 1e-6)
+  -- ts_stop = c.legion_get_current_time_in_micros()
+  -- c.printf("Processing took %.4f seconds\n", (ts_stop - ts_start) * 1e-6)
   
   printPeaks(r_peaks)
   -- writePeaks(r_peaks)
