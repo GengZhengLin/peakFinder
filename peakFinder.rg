@@ -132,34 +132,11 @@ task main()
   var r_peaks = region(ispace(int3d, {1, MAX_PEAKS, EVENTS * SHOTS}), Peak)
   var p_peaks = partition(equal, r_peaks, p_colors)
 
-  -- It this part is commmented, the code seems to be working fine. I don't understand.
-  -- var r_thr_high = region(ispace(int1d, EVENTS * SHOTS), double)
-  -- var r_thr_low = region(ispace(int1d, EVENTS * SHOTS), double)
-  -- for i = 0, EVENTS * SHOTS do
-  --   var event = [uint32](i / SHOTS) % EVENTS
-  --   r_thr_high[i] = t0[event]
-  --   r_thr_low[i] = t1[event]
-  -- end
-
-  fill(r_peaks.valid, false) 
-  
 	c.printf("Loading in %d batches\n", config.parallelism)
 
   var m_win : WinType
   m_win:init(0,0,WIDTH-1,HEIGHT-1)
 	c.printf("Processing in %d batches\n", config.parallelism)
-
-  -- var r_data = region(ispace(int3d, {EVENTS * SHOTS, HEIGHT, WIDTH}), Pixel)
-  -- attach(hdf5, r_data.cspad, h5_data_file, regentlib.file_read_write)
-  -- var p_data = partition(equal, r_data, p_colors)
-  -- acquire(r_data)
-  -- __demand(__parallel)
-  -- for color in p_data.colors do
-  --   AlImgProc.peakFinderV4r2(p_data[color], p_peaks[color], 5, m_win, THR_HIGH, THR_LOW, r0, dr)
-  -- end
-  -- release(r_data)
-  -- detach(hdf5, r_data)
-
 
   var r_data = region(ispace(int3d, {WIDTH, HEIGHT, EVENTS * SHOTS}), Pixel)
   var ts_start = c.legion_get_current_time_in_micros()
@@ -188,7 +165,6 @@ task main()
   
   printPeaks(r_peaks)
   -- writePeaks(r_peaks)
-  
 
   -- AlImgProc.writePeaks(r_peaks)
 

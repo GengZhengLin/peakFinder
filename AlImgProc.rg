@@ -79,20 +79,15 @@ where
 do
 	var index : uint32 = 0
   var half_width : int = [int](r0 + dr)
- --  var width : int = 2 * half_width + 1
-	-- var ring_map = region(ispace(int2d, {width, width}),int)
-  -- generate_ring_map(r0,dr,ring_map)
   -- c.printf("p_data.bounds.lo.x:%d, p_data.bounds.hi.x:%d\n",peaks.bounds.lo.x, peaks.bounds.hi.x)
   var HEIGHT = data.bounds.hi.y + 1
   var WIDTH = data.bounds.hi.x + 1
   -- c.printf("height:%d,width:%d\n",HEIGHT,WIDTH)
   -- var r_conmap = region(ispace(int2d, {WIDTH,HEIGHT}), uint32)
   -- for p_i in is do
+  for peak in peaks do peak.valid = false end
 	for p_i = peaks.bounds.lo.z, peaks.bounds.hi.z + 1 do
-    -- var i = [uint32](p_i) % (EVENTS * SHOTS)
     var i = p_i
-    -- var thr_high = r_thr_high[p_i]
-    -- var thr_low = r_thr_low[p_i]
     var queue : Queue
     queue:init()
     var r_conmap : float[185][388]
@@ -103,9 +98,6 @@ do
       end
     end
 
-    -- for ele in r_conmap do
-    --   @ele = 0
-    -- end
     for row = win.top, win.bot + 1 do
 			for col = win.left, win.right + 1 do
 				if data[{col, row, i}].cspad > thr_high and r_conmap[col][row] <= 0 and shot_count <= MAX_PEAKS then
@@ -121,11 +113,9 @@ do
           var c_min = ternary(col - half_width < win.left, win.left - col, -half_width )
           var c_max = ternary(col + half_width > win.right, win.right - col, half_width )
           -- c.printf("row:%d,col:%d,r_min:%d,r_max:%d,c_min:%d,c_max:%d\n",row,col,r_min,r_max,c_min,c_max)
-          -- c.printf("i:%d,row:%d,col:%d\n",i,row,col)
 
           for r = r_min, r_max + 1 do
             for c = c_min, c_max + 1 do
-              -- if ring_map[{r + half_width, c + half_width}] == 1 then
               if in_ring(r,c,r0,dr) and data[{c + col, r + row, i}].cspad < thr_low then
                 var cspad : double = data[{c + col, r + row, i}].cspad
                 average += cspad
@@ -142,12 +132,6 @@ do
             stddev = sqrt(variance)
           end
           -- c.printf("i=%d, row=%d, col=%d, average: %f, stddev: %f\n",i,row,col,average,stddev)
-
-          -- hack
-          -- if data[{i, row, col}].cspad < average + SON_MIN * stddev then
-          --   significant = false
-          -- end
-          -- c.printf("significant:%d\n",significant)
 					
           if significant then
 
@@ -199,7 +183,6 @@ do
               -- c.printf("After flood fill\n")
               var peak : Peak = peak_helper:get_peak()
               -- c.printf("peak_helper:get_peak()\n")
-              -- var peak : Peak
               if peakIsPreSelected(peak) then
                 peak.valid = true
                 peaks[{0, shot_count, p_i}] = peak
