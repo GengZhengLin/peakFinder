@@ -73,9 +73,9 @@ terra peakIsPreSelected(peak : Peak)
 end
 
 -- __demand(__cuda)
-task AlImgProc.peakFinderV4r2(data : region(ispace(int3d), Pixel), peaks : region(ispace(int3d), Peak),  rank : int, win : WinType, thr_high : double, thr_low : double, r0 : double, dr : double)
+task AlImgProc.peakFinderV4r2(data : region(ispace(int3d), Pixel), peaks : region(ispace(int3d), Peak),  rank : int, win : WinType, thr_high : double, thr_low : double, r0 : double, dr : double, r_conmap : region(ispace(int3d), uint32))
 where
-	reads (data), writes(peaks)
+	reads (data), writes(peaks), reads writes(r_conmap)
 do
   var ts_start = c.legion_get_current_time_in_micros()
 	var index : uint32 = 0
@@ -91,19 +91,17 @@ do
     var i = p_i
     var queue : Queue
     queue:init()
-    var r_conmap : float[185][388]
     var shot_count = 0   
     for ty = 0, HEIGHT do
       for tx = 0, WIDTH do
-        r_conmap[ty][tx] = 0
+        r_conmap[{tx, ty, p_i}] = 0
       end
     end
 
     for row = win.top, win.bot + 1 do
 			for col = win.left, win.right + 1 do
-				if data[{col, row, i}].cspad > thr_high and r_conmap[col][row] <= 0 and shot_count <= MAX_PEAKS then
-					index += 1 
-					var set = index
+				if data[{col, row, i}].cspad > thr_high and r_conmap[{col, row, p_i}] <= 0 and shot_count <= MAX_PEAKS then
+					var set = i
           var significant = true
           var average : double = 0.0
           var variance : double = 0.0
@@ -157,7 +155,7 @@ do
               -- c.printf("i:%d,row:%d,col:%d,cspad:%f\n",i,row,col,data[{i, row, col}].cspad)
               peak_helper:init(row,col,data[{col,row,i}].cspad,average,stddev, p_i%SHOTS, WIDTH,HEIGHT)
               
-              r_conmap[col][row] = set
+              r_conmap[{col, row, p_i}] = set
               queue:clear()
               queue:enqueue({col,row,i})
               peak_helper:add_point(data[{col,row,i}].cspad, row, col)
@@ -173,8 +171,8 @@ do
                 for j = 0, 4 do
                   var t = candidates[j]
                   if t.y >= r_min and t.y <= r_max and t.x >= c_min and t.x <= c_max then
-                    if data[t].cspad > thr_low and r_conmap[t.x][t.y] == 0 then 
-                      r_conmap[t.x][t.y] = set 
+                    if data[t].cspad > thr_low and r_conmap[{t.x, t.y, p_i}] == 0 then 
+                      r_conmap[{t.x, t.y, p_i}] = set 
                       queue:enqueue(t)
                       peak_helper:add_point(data[t].cspad, t.y, t.x)
                     end

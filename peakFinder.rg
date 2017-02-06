@@ -177,13 +177,15 @@ task main()
   end
   
   -- process data
+  var r_conmap = region(ispace(int3d, {WIDTH,HEIGHT,is.volume}), uint32)
+  var p_conmap = partition(equal, r_conmap, p_colors)
   ts_start = c.legion_get_current_time_in_micros()
   c.printf("Start sending out tasks at %.4f\n", (ts_start) * 1e-6)
   __demand(__spmd)
   do
-    -- _+=AlImgProc.peakFinderV4r2(r_data, r_peaks, is, 4, m_win, THR_HIGH, THR_LOW, r0, dr)
+    -- _+=AlImgProc.peakFinderV4r2(r_data, r_peaks, is, 4, m_win, THR_HIGH, THR_LOW, r0, dr, r_conmap)
     for color in p_data.colors do
-      AlImgProc.peakFinderV4r2(p_data[color], p_peaks[color], 4, m_win, THR_HIGH, THR_LOW, r0, dr)
+      AlImgProc.peakFinderV4r2(p_data[color], p_peaks[color], 4, m_win, THR_HIGH, THR_LOW, r0, dr, r_conmap)
     end
   end
 
@@ -191,9 +193,7 @@ task main()
   -- c.printf("Processing took %.4f seconds\n", (ts_stop - ts_start) * 1e-6)
   
   printPeaks(r_peaks)
-  writePeaks(r_peaks)
-
-  -- AlImgProc.writePeaks(r_peaks)
+  -- writePeaks(r_peaks)
 
 end
 
