@@ -18,7 +18,7 @@ hdr = 'Seg  Row  Col  Npix      Amax      Atot   rcent   ccent rsigma  csigma '+
       'rmin rmax cmin cmax    bkgd     rms     son\n'
 fmt = '%3d %4d %4d  %4d  %8.1f  %8.1f  %6.1f  %6.1f %6.2f  %6.2f %4d %4d %4d %4d  %6.2f  %6.2f  %6.2f\n'
 
-cspad = cspad[0:events,:,:,:]
+
 # fw = open("peakFindResult_python", 'w')
 total_count = np.array(0,'i')
 
@@ -29,12 +29,17 @@ size = comm.Get_size()
 
 # print("size:{0},rank:{1}".format(size,rank))
 counter = np.array(0,'i')
-if rank == 0:
-    start = timeit.default_timer()
-    
-for i in range(events):
+step = events / size
+st = rank * step
+ed = min((rank+1)*step, events)
+print("task {0} start from {1} to {2}".format(rank,st,ed))
+cspad = cspad[st:ed,:,:,:]
+
+comm.Barrier()
+start = timeit.default_timer()
+for i in range(ed-st):
 	# fw.write(hdr)
-	if i % size != rank: continue
+	# if i % size != rank: continue
 	peaks = alg.peak_finder_v4r2(cspad[i,:,:,:],thr_low=10, thr_high=150, rank=4, r0=5, dr=0.05)
 	counter += 1
 	# for peak in peaks :
@@ -44,12 +49,12 @@ for i in range(events):
 	#     fw.write( fmt % (seg, row, col, npix, amax, atot, rcent, ccent, rsigma, csigma,\
 	#                  rmin, rmax, cmin, cmax, bkgd, rms, son))
 
-comm.Reduce(counter,total_count)
-
+# comm.Reduce(counter,total_count)
+stop = timeit.default_timer()
+print("peakFinderTask: rank:{0}, start:{1:.4f}, end:{2:.4f}".format(rank,start,stop))
+# comm.Barrier()
 if rank == 0:
-    stop = timeit.default_timer()
     print("size:{0}",format(size))
-    print("time: {0}".format(stop - start))
     print("counter: {0}".format(total_count))
 # fw.close()
 

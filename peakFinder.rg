@@ -29,12 +29,12 @@ local dr = 0.05
 local THR_LOW = 10
 local THR_HIGH = 150
 -- clustter test
--- local EVENTS = 6000
--- local data_file = "/reg/d/psdm/cxi/cxitut13/scratch/cpo/test6000.bin"
+local EVENTS = 1000
+local data_file = "/reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin"
 
 -- local test
-local EVENTS = 5
-local data_file = "small_test"
+-- local EVENTS = 5
+-- local data_file = "small_test"
 
 
 task print_region(r : region(ispace(int3d), Pixel))
@@ -79,6 +79,7 @@ end
 task parallel_load_data(r_data : region(ispace(int3d), Pixel))
 where reads writes (r_data)
 do
+  c.printf("Loading %s into panels %d through %d\n", data_file, r_data.bounds.lo.z, r_data.bounds.hi.z)
   var sizeofFloat : int = 4
   var offset = (r_data.bounds.lo.z) * WIDTH * HEIGHT * sizeofFloat
   var f = c.fopen(data_file, "rb")
@@ -89,7 +90,7 @@ do
     for row = 0, HEIGHT do
       for col = 0, WIDTH do
         if not read_float(f, x) then
-          c.printf("Couldn't read data in shot %d\n", row)
+          c.printf("parallel_load_data: Couldn't read data in shot %d\n", i)
           return -1
         end
         r_data[{col,row,i}].cspad = x[0]
@@ -119,28 +120,100 @@ do
   end
 end
 
-task writePeaks(r_peaks : region(ispace(int3d), Peak))
-where
-  reads(r_peaks)
+task calSum(r_data : region(ispace(int3d), Pixel), r_sums : region(ispace(int3d), float))
+where reads (r_data), writes(r_sums)
 do
-  var f = c.fopen("peakFindResult_regent",'w')
-  c.printf("write to peakFindResult_regent\n")
-  var hdr = 'Seg  Row  Col  Npix      Amax      Atot   rcent   ccent rsigma  csigma rmin rmax cmin cmax    bkgd     rms     son\n'
-  for event = 0, EVENTS do
-    c.fprintf(f,hdr)
-    var count = 0
-    for shot = 0, SHOTS do
-      for i = 0, MAX_PEAKS do
-        var peak : Peak = r_peaks[{0, i, SHOTS * event + shot}]
-        if peak.valid then --break 
-          count += 1
-          c.fprintf(f,"%3d %4d %4d  %4d  %8.1f  %8.1f  %6.1f  %6.1f %6.2f  %6.2f %4d %4d %4d %4d  %6.2f  %6.2f  %6.2f\n",
-            [int](peak.seg), [int](peak.row), [int](peak.col), [int](peak.npix), peak.amp_max, peak.amp_tot, peak.row_cgrav, peak.col_cgrav, peak.row_sigma, peak.col_sigma, 
-            [int](peak.row_min), [int](peak.row_max), [int](peak.col_min), [int](peak.col_max), peak.bkgd, peak.noise, peak.son)
-        end
+  -- var filename : rawstring = "                            "
+  -- c.printf("r_data.bounds.lo.z, r_data.bounds.hi.z: (%d,%d)\n",r_data.bounds.lo.z, r_data.bounds.hi.z)
+  -- c.sprintf(filename, "pixelSum_%d", parallelism)
+  -- c.printf("Write to %s\n", filename)
+  -- var f = c.fopen(filename,'w')
+  -- var img_num = r_data.bounds.hi.z - r_data.bounds.lo.z + 1;
+  -- var sums = region(ispace(int1d, img_num), float)
+  for i = r_data.bounds.lo.z, r_data.bounds.hi.z+1 do
+    var sum = 0.0
+    for r = r_data.bounds.lo.y, r_data.bounds.hi.y+1 do
+      for c = r_data.bounds.lo.z, r_data.bounds.hi.z+1 do
+        sum += r_data[{c,r,i}].cspad
       end
     end
-    c.printf("In event %d there were %d peaks\n\n", event, count)
+    r_sums[{0,0,i}] = sum
+    -- c.printf("panelImage:%d,sum:%.4f\n",i,sum)
+  end
+  -- for i = r_data.bounds.lo.z, r_data.bounds.hi.z+1 do
+  --   c.fprintf(f,"%.4f\n", sums[i])
+  -- end
+  return 0
+end
+
+task printSum(r_sums : region(ispace(int3d), float), parallelism : int)
+where reads (r_sums)
+do
+  -- var filename : rawstring = "                                   "
+  -- c.sprintf(filename, "pixelSum_%d", parallelism)
+  -- var f = c.fopen(filename, 'w')
+  for i = [int](r_sums.bounds.lo.z), [int](r_sums.bounds.hi.z)+1 do
+    -- c.fprintf(f,"panelImage:%d,sum:%.4f\n",i,r_sums[{0,0,i}])
+    c.printf("panelImage:%d,sum:%.4f\n",i,r_sums[{0,0,i}])
+  end
+end
+
+task dummy_task(r_peaks : region(ispace(int3d), Peak))
+where
+  reads writes (r_peaks)
+do
+  return 1
+end
+
+-- task writePeaks(r_peaks : region(ispace(int3d), Peak), parallelism : int)
+-- where
+--   reads writes(r_peaks)
+-- do
+--   var filename : rawstring = "                                           "
+--   c.sprintf(filename, "peakFindResult_regent_%d", parallelism)
+--   var f = c.fopen(filename,'w')
+--   c.printf("write to %s\n", filename)
+--   var hdr = 'Seg  Row  Col  Npix      Amax      Atot   rcent   ccent rsigma  csigma rmin rmax cmin cmax    bkgd     rms     son\n'
+--   for event = 0, EVENTS do
+--     -- c.fprintf(f,"event:%d\n", event)
+--     c.fprintf(f,hdr)
+--     var count = 0
+--     for shot = 0, SHOTS do
+--       -- c.fprintf(f,"panels:%d\n",shot)
+--       for i = 0, MAX_PEAKS do
+--         var peak : Peak = r_peaks[{0, i, SHOTS * event + shot}]
+--         if peak.valid then --break 
+--           count += 1
+--           c.fprintf(f,"%3d %4d %4d  %4d  %8.1f  %8.1f  %6.1f  %6.1f %6.2f  %6.2f %4d %4d %4d %4d  %6.2f  %6.2f  %6.2f\n",
+--             [int](peak.seg), [int](peak.row), [int](peak.col), [int](peak.npix), peak.amp_max, peak.amp_tot, peak.row_cgrav, peak.col_cgrav, peak.row_sigma, peak.col_sigma, 
+--             [int](peak.row_min), [int](peak.row_max), [int](peak.col_min), [int](peak.col_max), peak.bkgd, peak.noise, peak.son)
+--         end
+--       end
+--     end
+--     c.printf("In event %d there were %d peaks\n\n", event, count)
+--   end
+-- end
+
+task writePeaks(r_peaks : region(ispace(int3d), Peak), parallelism : int)
+where
+  reads writes(r_peaks)
+do
+  var filename : rawstring = "                                           "
+  c.sprintf(filename, "peaks_%d/peaks_%d_%d", parallelism, r_peaks.bounds.lo.z,r_peaks.bounds.hi.z)
+  var f = c.fopen(filename,'w')
+  c.printf("write to %s\n", filename)
+  var hdr = 'Evt Seg  Row  Col  Npix      Amax      Atot   rcent   ccent rsigma  csigma rmin rmax cmin cmax    bkgd     rms     son\n'
+  for j = r_peaks.bounds.lo.z, r_peaks.bounds.hi.z+1 do
+    var event = j / SHOTS
+    var shot = j % SHOTS
+    for i = 0, MAX_PEAKS do
+      var peak : Peak = r_peaks[{0, i, SHOTS * event + shot}]
+      if peak.valid then --break 
+        c.fprintf(f,"%3d %3d %4d %4d  %4d  %8.1f  %8.1f  %6.1f  %6.1f %6.2f  %6.2f %4d %4d %4d %4d  %6.2f  %6.2f  %6.2f\n", event,
+          [int](peak.seg), [int](peak.row), [int](peak.col), [int](peak.npix), peak.amp_max, peak.amp_tot, peak.row_cgrav, peak.col_cgrav, peak.row_sigma, peak.col_sigma, 
+          [int](peak.row_min), [int](peak.row_max), [int](peak.col_min), [int](peak.col_max), peak.bkgd, peak.noise, peak.son)
+      end
+    end
   end
 end
 
@@ -167,33 +240,50 @@ task main()
   var r_data = region(ispace(int3d, {WIDTH, HEIGHT, EVENTS * SHOTS}), Pixel)
   var p_data = partition(equal, r_data, p_colors)
   var is = ispace(int1d, EVENTS * SHOTS)
+
+  var r_sums = region(ispace(int3d, {1,1,EVENTS * SHOTS}), float);
+  fill(r_sums, -1)
+  var p_sums = partition(equal, r_sums, p_colors)
   -- load data
   var ts_start = c.legion_get_current_time_in_micros()
-  c.printf("Start sending out tasks at %.4f\n", (ts_start) * 1e-6)
+  c.printf("Start sending loading tasks at %.4f\n", (ts_start) * 1e-6)
+  -- do
+  --   var _ = 0
+  --   for color in p_data.colors do
+  --     _ += parallel_load_data(p_data[color])
+  --     _ += calSum(p_data[color], p_sums[color])
+  --   end
+  --   wait_for(_)
+  --   -- printSum(r_sums,config.parallelism)
+  -- end
+
   do
-    for color in p_data.colors do
-      parallel_load_data(p_data[color])
-    end
+    var _ = load_data(r_data)
+    wait_for(_)
   end
-  
+
   -- process data
   var r_conmap = region(ispace(int3d, {WIDTH,HEIGHT,is.volume}), uint32)
   var p_conmap = partition(equal, r_conmap, p_colors)
   ts_start = c.legion_get_current_time_in_micros()
   c.printf("Start sending out tasks at %.4f\n", (ts_start) * 1e-6)
-  __demand(__spmd)
+  -- __demand(__spmd)
   do
     -- _+=AlImgProc.peakFinderV4r2(r_data, r_peaks, is, 4, m_win, THR_HIGH, THR_LOW, r0, dr, r_conmap)
+    var _ = 0
     for color in p_data.colors do
-      AlImgProc.peakFinderV4r2(p_data[color], p_peaks[color], 4, m_win, THR_HIGH, THR_LOW, r0, dr, r_conmap)
+      _ += AlImgProc.peakFinderV4r2(p_data[color], p_peaks[color], 4, m_win, THR_HIGH, THR_LOW, r0, dr, p_conmap[color])
     end
+    _ += dummy_task(r_peaks)
+    wait_for(_)
   end
-
   -- ts_stop = c.legion_get_current_time_in_micros()
   -- c.printf("Processing took %.4f seconds\n", (ts_stop - ts_start) * 1e-6)
   
-  printPeaks(r_peaks)
-  -- writePeaks(r_peaks)
+  -- printPeaks(r_peaks)
+  for color in p_peaks.colors do
+    writePeaks(p_peaks[color], config.parallelism)
+  end
 
 end
 

@@ -86,7 +86,12 @@ do
   -- c.printf("height:%d,width:%d\n",HEIGHT,WIDTH)
   -- var r_conmap = region(ispace(int2d, {WIDTH,HEIGHT}), uint32)
   -- for p_i in is do
-  for peak in peaks do peak.valid = false end
+  for i = peaks.bounds.lo.z, peaks.bounds.hi.z + 1 do
+    for j = 0, MAX_PEAKS do
+      peaks[{0,j,i}].valid = false
+    end 
+  end
+  
 	for p_i = peaks.bounds.lo.z, peaks.bounds.hi.z + 1 do
     var i = p_i
     var queue : Queue
