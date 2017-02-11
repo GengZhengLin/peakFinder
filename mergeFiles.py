@@ -16,7 +16,7 @@ for file in files:
 		nums=r.findall(file)
 		numToName[int(nums[0])] = file
 
-print(numToName)
+# print(numToName)
 num = 0
 f = open(args.folder+"/merged",'w')
 while True:
@@ -25,6 +25,9 @@ while True:
 	file = numToName[num]
 	fr = open(args.folder+"/"+file,'r')
 	lines = fr.readlines()
+	if len(lines) == 0:
+		print(file + ": emplty!")
 	f.writelines(lines)
 	nums = r.findall(file)
 	num = int(nums[1])+1
+print("num:{0}".format(num))
