@@ -35,6 +35,7 @@ local data_file = "/reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin"
 -- local test
 -- local EVENTS = 5
 -- local data_file = "small_test"
+-- local dir = "/home/zhenglin/WinterProject/peakFinder"
 
 
 task print_region(r : region(ispace(int3d), Pixel))
@@ -194,14 +195,15 @@ end
 --   end
 -- end
 
-task writePeaks(r_peaks : region(ispace(int3d), Peak), parallelism : int)
+task writePeaks(r_peaks : region(ispace(int3d), Peak), color : int3d, parallelism : int)
 where
   reads writes(r_peaks)
 do
-  var filename : rawstring = "                                           "
-  c.sprintf(filename, "peaks_%d/peaks_%d_%d", parallelism, r_peaks.bounds.lo.z,r_peaks.bounds.hi.z)
-  var f = c.fopen(filename,'w')
+  var filename : int8[256]
+  c.sprintf([&int8](filename), "peaks_%d/peaks_%d_%d", parallelism, r_peaks.bounds.lo.z,r_peaks.bounds.hi.z)
   c.printf("write to %s\n", filename)
+  var f = c.fopen(filename,'w')
+  c.printf("color:%d,%d,%d\n", color.x, color.y, color.z)
   var hdr = 'Evt Seg  Row  Col  Npix      Amax      Atot   rcent   ccent rsigma  csigma rmin rmax cmin cmax    bkgd     rms     son\n'
   for j = r_peaks.bounds.lo.z, r_peaks.bounds.hi.z+1 do
     var event = j / SHOTS
@@ -247,44 +249,65 @@ task main()
   -- load data
   var ts_start = c.legion_get_current_time_in_micros()
   c.printf("Start sending loading tasks at %.4f\n", (ts_start) * 1e-6)
-  -- do
-  --   var _ = 0
-  --   for color in p_data.colors do
-  --     _ += parallel_load_data(p_data[color])
-  --     _ += calSum(p_data[color], p_sums[color])
-  --   end
-  --   wait_for(_)
-  --   -- printSum(r_sums,config.parallelism)
-  -- end
-
   do
-    var _ = load_data(r_data)
+    var _ = 0
+    for color in p_data.colors do
+      _ += parallel_load_data(p_data[color])
+    end
     wait_for(_)
   end
+
+  -- do
+  --   var _ = load_data(r_data)
+  --   wait_for(_)
+  -- end
 
   -- process data
   var r_conmap = region(ispace(int3d, {WIDTH,HEIGHT,is.volume}), uint32)
   var p_conmap = partition(equal, r_conmap, p_colors)
   ts_start = c.legion_get_current_time_in_micros()
   c.printf("Start sending out tasks at %.4f\n", (ts_start) * 1e-6)
-  -- __demand(__spmd)
   do
     -- _+=AlImgProc.peakFinderV4r2(r_data, r_peaks, is, 4, m_win, THR_HIGH, THR_LOW, r0, dr, r_conmap)
-    var _ = 0
+    -- var _ = 0
+    __demand(__spmd)
     for color in p_data.colors do
-      _ += AlImgProc.peakFinderV4r2(p_data[color], p_peaks[color], 4, m_win, THR_HIGH, THR_LOW, r0, dr, p_conmap[color])
+      AlImgProc.peakFinderV4r2(p_data[color], p_peaks[color], 4, m_win, THR_HIGH, THR_LOW, r0, dr, p_conmap[color])
     end
-    _ += dummy_task(r_peaks)
-    wait_for(_)
   end
   -- ts_stop = c.legion_get_current_time_in_micros()
   -- c.printf("Processing took %.4f seconds\n", (ts_stop - ts_start) * 1e-6)
   
   -- printPeaks(r_peaks)
   for color in p_peaks.colors do
-    writePeaks(p_peaks[color], config.parallelism)
+    writePeaks(p_peaks[color], color, config.parallelism)
   end
 
+  return 0
 end
 
-regentlib.start(main)
+
+if os.getenv('SAVEOBJ') == '1' then
+  -- local dir = "/home/zhenglin/WinterProject/peakFinder"
+  local dir = "/reg/neh/home/zhenglin/Code/peakFinder"
+  local exe  = dir .. "/peakFinder"
+  regentlib.saveobj(main, exe, "executable")
+  print("Saved executable to " .. exe)
+  -- local env = ""
+  -- if os.getenv("DYLD_LIBRARY_PATH") then
+  --   env = "DYLD_LIBRARY_PATH=" .. os.getenv("DYLD_LIBRARY_PATH") .. " "
+  -- end
+  -- print("env:" .. env)
+  -- -- Pass the arguments along so that the child process is able to
+  -- -- complete the execution of the parent.
+  -- local args = ""
+  -- for _, arg in ipairs(rawget(_G, "arg")) do
+  --   args = args .. " " .. arg
+  -- end
+  -- assert(os.execute(env .. exe .. args) == 0)
+else
+  regentlib.start(main)
+end
+
+
+-- regentlib.start(main)
