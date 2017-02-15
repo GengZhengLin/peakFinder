@@ -120,7 +120,7 @@ do
 
           for r = r_min, r_max + 1 do
             for c = c_min, c_max + 1 do
-              if in_ring(r,c,r0,dr) and data[{c + col, r + row, i}].cspad < thr_low then
+              if in_ring(c,r,r0,dr) and data[{c + col, r + row, i}].cspad < thr_low then
                 var cspad : double = data[{c + col, r + row, i}].cspad
                 average += cspad
                 variance += cspad * cspad

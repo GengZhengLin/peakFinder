@@ -32,6 +32,11 @@ def run_peafFinder():
 		if os.path.isfile(log_file):
 			print('delete '+log_file)
 			os.remove(log_file)
+		peak_dir = "peaks_{0}".format(15*nodes)
+		if os.path.isdir(peak_dir):
+			rm_command = 'rm {0}/*'.format(peak_dir)
+			print(rm_command)
+			os.system(rm_command)
 		os.system(command)
 # os.system(command)
 

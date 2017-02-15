@@ -15,19 +15,19 @@ alg.set_peak_selection_pars(npix_min=2, npix_max=50, amax_thr=10, atot_thr=20, s
 
 hdr = 'Seg  Row  Col  Npix      Amax      Atot   rcent   ccent rsigma  csigma '+\
       'rmin rmax cmin cmax    bkgd     rms     son\n'
-fmt = '%3d %4d %4d  %4d  %8.1f  %8.1f  %6.1f  %6.1f %6.2f  %6.2f %4d %4d %4d %4d  %6.2f  %6.2f  %6.2f\n'
+fmt = '%3d %3d %4d %4d  %4d  %8.1f  %8.1f  %6.1f  %6.1f %6.2f  %6.2f %4d %4d %4d %4d  %6.2f  %6.2f  %6.2f\n'
 
 
 fw = open("peakFindResult_python_{0}".format(events), 'w')
 
 for i in range(events):
-	fw.write(hdr)
+	# fw.write(hdr)
 	peaks = alg.peak_finder_v4r2(cspad[i,:,:,:],thr_low=10, thr_high=150, rank=4, r0=5, dr=0.05)
 	# counter += 1
 	for peak in peaks :
 	    seg,row,col,npix,amax,atot,rcent,ccent,rsigma,csigma,\
 	    rmin,rmax,cmin,cmax,bkgd,rms,son = peak[0:17]
 	     
-	    fw.write( fmt % (seg, row, col, npix, amax, atot, rcent, ccent, rsigma, csigma,\
+	    fw.write( fmt % (i, seg, row, col, npix, amax, atot, rcent, ccent, rsigma, csigma,\
 	                 rmin, rmax, cmin, cmax, bkgd, rms, son))
 fw.close()

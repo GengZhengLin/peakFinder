@@ -35,18 +35,9 @@ local data_file = "/reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin"
 -- local test
 -- local EVENTS = 5
 -- local data_file = "small_test"
+
+
 -- local dir = "/home/zhenglin/WinterProject/peakFinder"
-
-
-task print_region(r : region(ispace(int3d), Pixel))
-where
-  reads (r)
-do
-  for i = r.bounds.lo.x, r.bounds.hi.x do
-    c.printf("%f ", r[{i,0,0}].cspad)
-  end
-  c.printf("\n")
-end
 
 terra read_float(f : &c.FILE, number : &float)
   return c.fread(number, sizeof(float), 1, f) == 1
@@ -77,14 +68,20 @@ do
   return 0
 end
 
+
+-- terra sizeofFloat(number : &float):
+--   c.printf("size of float: %d\n", (sizeof(float)))
+--   return sizeof(float)
+-- end
+
 task parallel_load_data(r_data : region(ispace(int3d), Pixel))
 where reads writes (r_data)
 do
-  c.printf("Loading %s into panels %d through %d\n", data_file, r_data.bounds.lo.z, r_data.bounds.hi.z)
   var sizeofFloat : int = 4
   var offset = (r_data.bounds.lo.z) * WIDTH * HEIGHT * sizeofFloat
   var f = c.fopen(data_file, "rb")
   c.fseek(f,offset,c.SEEK_SET)
+  c.printf("Loading %s into panels %d through %d, offset:%d\n", data_file, r_data.bounds.lo.z, r_data.bounds.hi.z, offset)
   var x : float[1]
   -- c.printf("r_data.bounds.lo.z, r_data.bounds.hi.z + 1 = %d, %d\n",r_data.bounds.lo.z, r_data.bounds.hi.z + 1)
   for i = r_data.bounds.lo.z, r_data.bounds.hi.z + 1 do
@@ -195,6 +192,7 @@ end
 --   end
 -- end
 
+
 task writePeaks(r_peaks : region(ispace(int3d), Peak), color : int3d, parallelism : int)
 where
   reads writes(r_peaks)
@@ -203,7 +201,7 @@ do
   c.sprintf([&int8](filename), "peaks_%d/peaks_%d_%d", parallelism, r_peaks.bounds.lo.z,r_peaks.bounds.hi.z)
   c.printf("write to %s\n", filename)
   var f = c.fopen(filename,'w')
-  c.printf("color:%d,%d,%d\n", color.x, color.y, color.z)
+  -- c.printf("color:%d,%d,%d\n", color.x, color.y, color.z)
   var hdr = 'Evt Seg  Row  Col  Npix      Amax      Atot   rcent   ccent rsigma  csigma rmin rmax cmin cmax    bkgd     rms     son\n'
   for j = r_peaks.bounds.lo.z, r_peaks.bounds.hi.z+1 do
     var event = j / SHOTS
