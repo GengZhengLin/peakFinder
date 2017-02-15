@@ -1,0 +1,219 @@
+kinit: KDC can't fulfill requested option while renewing credentials
+Loading in 30 batches
+Processing in 30 batches
+Start sending loading tasks at 0.0125
+Loading in 30 batches
+Processing in 30 batches
+Start sending loading tasks at 0.0120
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 0 through 1066, offset:0
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 0 through 1066, offset:0
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 1067 through 2133, offset:306357040
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 2134 through 3200, offset:612714080
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 3201 through 4267, offset:919071120
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 18139 through 19205, offset:5208069680
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 2134 through 3200, offset:612714080
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 3201 through 4267, offset:919071120
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 17072 through 18138, offset:4901712640
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 1067 through 2133, offset:306357040
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 4268 through 5334, offset:1225428160
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 5335 through 6401, offset:1531785200
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 7469 through 8535, offset:2144499280
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 6402 through 7468, offset:1838142240
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 4268 through 5334, offset:1225428160
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 5335 through 6401, offset:1531785200
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 8536 through 9602, offset:2450856320
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 6402 through 7468, offset:1838142240
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 7469 through 8535, offset:2144499280
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 9603 through 10669, offset:2757213360
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 10670 through 11736, offset:3063570400
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 8536 through 9602, offset:2450856320
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 11737 through 12803, offset:3369927440
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 9603 through 10669, offset:2757213360
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 12804 through 13870, offset:3676284480
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 10670 through 11736, offset:3063570400
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 13871 through 14937, offset:3982641520
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 11737 through 12803, offset:3369927440
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 14938 through 16004, offset:4288998560
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 12804 through 13870, offset:3676284480
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 16005 through 17071, offset:4595355600
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 13871 through 14937, offset:3982641520
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 14938 through 16004, offset:4288998560
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 16005 through 17071, offset:4595355600
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 19206 through 20272, offset:5514426720
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 17072 through 18138, offset:4901712640
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 18139 through 19205, offset:5208069680
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 19206 through 20272, offset:5514426720
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 20273 through 21339, offset:5820783760
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 21340 through 22406, offset:6127140800
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 20273 through 21339, offset:5820783760
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 22407 through 23473, offset:6433497840
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 21340 through 22406, offset:6127140800
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 23474 through 24540, offset:6739854880
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 22407 through 23473, offset:6433497840
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 23474 through 24540, offset:6739854880
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 24541 through 25607, offset:7046211920
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 24541 through 25607, offset:7046211920
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 25608 through 26674, offset:7352568960
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 26675 through 27741, offset:7658926000
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 27742 through 28808, offset:7965283040
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 28809 through 29875, offset:8271640080
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 25608 through 26674, offset:7352568960
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 26675 through 27741, offset:7658926000
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 29876 through 30942, offset:8577997120
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 30943 through 31999, offset:8884354160
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 27742 through 28808, offset:7965283040
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 28809 through 29875, offset:8271640080
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 29876 through 30942, offset:8577997120
+Loading /reg/d/psdm/cxi/cxitut13/scratch/cpo/test1000.bin into panels 30943 through 31999, offset:8884354160
+Start sending out tasks at 26.4043
+Start sending out tasks at 26.5994
+peakFinderTask: (6402 - 7469) starts from 26.4374, ends at 26.7878, num_peaks:230
+peakFinderTask: (0 - 1067) starts from 26.4102, ends at 26.8252, num_peaks:226
+peakFinderTask: (2134 - 3201) starts from 26.4144, ends at 26.8258, num_peaks:207
+peakFinderTask: (17072 - 18139) starts from 26.4082, ends at 26.8261, num_peaks:200
+peakFinderTask: (1067 - 2134) starts from 26.4122, ends at 26.8286, num_peaks:176
+peakFinderTask: (5335 - 6402) starts from 26.4231, ends at 26.8422, num_peaks:189
+peakFinderTask: (7469 - 8536) starts from 26.4401, ends at 26.8424, num_peaks:202
+peakFinderTask: (4268 - 5335) starts from 26.4204, ends at 26.8424, num_peaks:199
+peakFinderTask: (3201 - 4268) starts from 26.4159, ends at 26.8529, num_peaks:234
+peakFinderTask: (8536 - 9603) starts from 26.4503, ends at 26.8570, num_peaks:188
+peakFinderTask: (18139 - 19206) starts from 26.4089, ends at 26.8590, num_peaks:226
+peakFinderTask: (10670 - 11737) starts from 26.4670, ends at 26.8597, num_peaks:266
+peakFinderTask: (9603 - 10670) starts from 26.4558, ends at 26.8853, num_peaks:297
+peakFinderTask: (12804 - 13871) starts from 26.4810, ends at 26.8902, num_peaks:234
+peakFinderTask: (11737 - 12804) starts from 26.4699, ends at 26.9004, num_peaks:225
+peakFinderTask: (4268 - 5335) starts from 26.6134, ends at 26.9884, num_peaks:199
+peakFinderTask: (1067 - 2134) starts from 26.6044, ends at 27.0063, num_peaks:176
+peakFinderTask: (2134 - 3201) starts from 26.6060, ends at 27.0088, num_peaks:207
+peakFinderTask: (5335 - 6402) starts from 26.6163, ends at 27.0126, num_peaks:189
+peakFinderTask: (0 - 1067) starts from 26.6032, ends at 27.0195, num_peaks:226
+peakFinderTask: (6402 - 7469) starts from 26.6243, ends at 27.0215, num_peaks:230
+peakFinderTask: (3201 - 4268) starts from 26.6078, ends at 27.0266, num_peaks:234
+peakFinderTask: (7469 - 8536) starts from 26.6267, ends at 27.0311, num_peaks:202
+peakFinderTask: (13871 - 14938) starts from 26.6697, ends at 27.0540, num_peaks:176
+peakFinderTask: (9603 - 10670) starts from 26.6411, ends at 27.0619, num_peaks:297
+peakFinderTask: (10670 - 11737) starts from 26.6507, ends at 27.0626, num_peaks:266
+peakFinderTask: (14938 - 16005) starts from 26.6802, ends at 27.0681, num_peaks:227
+peakFinderTask: (8536 - 9603) starts from 26.6381, ends at 27.0838, num_peaks:188
+peakFinderTask: (13871 - 14938) starts from 26.7880, ends at 27.1040, num_peaks:176
+write to peaks_30/peaks_6402_7468
+peakFinderTask: (11737 - 12804) starts from 26.6576, ends at 27.1093, num_peaks:225
+write to peaks_30/peaks_0_1066
+write to peaks_30/peaks_2134_3200
+write to peaks_30/peaks_17072_18138
+write to peaks_30/peaks_1067_2133
+peakFinderTask: (12804 - 13871) starts from 26.6662, ends at 27.1195, num_peaks:234
+write to peaks_30/peaks_5335_6401
+write to peaks_30/peaks_7469_8535
+write to peaks_30/peaks_4268_5334
+write to peaks_30/peaks_3201_4267
+write to peaks_30/peaks_8536_9602
+write to peaks_30/peaks_18139_19205
+write to peaks_30/peaks_10670_11736
+write to peaks_30/peaks_9603_10669
+write to peaks_30/peaks_12804_13870
+write to peaks_30/peaks_11737_12803
+peakFinderTask: (14938 - 16005) starts from 26.8254, ends at 27.1491, num_peaks:227
+write to peaks_30/peaks_13871_14937
+write to peaks_30/peaks_14938_16004
+peakFinderTask: (16005 - 17072) starts from 26.8260, ends at 27.1503, num_peaks:206
+write to peaks_30/peaks_16005_17071
+peakFinderTask: (20273 - 21340) starts from 26.8288, ends at 27.1541, num_peaks:212
+write to peaks_30/peaks_20273_21339
+peakFinderTask: (19206 - 20273) starts from 26.8262, ends at 27.1570, num_peaks:216
+write to peaks_30/peaks_19206_20272
+peakFinderTask: (22407 - 23474) starts from 26.8425, ends at 27.1669, num_peaks:217
+write to peaks_30/peaks_22407_23473
+peakFinderTask: (23474 - 24541) starts from 26.8425, ends at 27.1686, num_peaks:201
+write to peaks_30/peaks_23474_24540
+peakFinderTask: (21340 - 22407) starts from 26.8424, ends at 27.1688, num_peaks:237
+write to peaks_30/peaks_21340_22406
+peakFinderTask: (24541 - 25608) starts from 26.8532, ends at 27.1824, num_peaks:219
+write to peaks_30/peaks_24541_25607
+peakFinderTask: (25608 - 26675) starts from 26.8572, ends at 27.1832, num_peaks:205
+write to peaks_30/peaks_25608_26674
+peakFinderTask: (27742 - 28809) starts from 26.8599, ends at 27.1868, num_peaks:221
+write to peaks_30/peaks_27742_28808
+peakFinderTask: (26675 - 27742) starts from 26.8592, ends at 27.1951, num_peaks:202
+write to peaks_30/peaks_26675_27741
+peakFinderTask: (28809 - 29876) starts from 26.8855, ends at 27.2176, num_peaks:234
+write to peaks_30/peaks_28809_29875
+peakFinderTask: (30943 - 32000) starts from 26.9006, ends at 27.2196, num_peaks:0
+write to peaks_30/peaks_30943_31999
+peakFinderTask: (29876 - 30943) starts from 26.8905, ends at 27.2278, num_peaks:216
+write to peaks_30/peaks_29876_30942
+peakFinderTask: (16005 - 17072) starts from 26.9887, ends at 27.3070, num_peaks:206
+write to peaks_30/peaks_4268_5334
+write to peaks_30/peaks_1067_2133
+write to peaks_30/peaks_2134_3200
+write to peaks_30/peaks_5335_6401
+write to peaks_30/peaks_0_1066
+write to peaks_30/peaks_6402_7468
+write to peaks_30/peaks_3201_4267
+write to peaks_30/peaks_7469_8535
+write to peaks_30/peaks_13871_14937
+peakFinderTask: (17072 - 18139) starts from 27.0064, ends at 27.3318, num_peaks:200
+write to peaks_30/peaks_9603_10669
+write to peaks_30/peaks_10670_11736
+peakFinderTask: (18139 - 19206) starts from 27.0090, ends at 27.3346, num_peaks:226
+write to peaks_30/peaks_14938_16004
+write to peaks_30/peaks_8536_9602
+peakFinderTask: (19206 - 20273) starts from 27.0127, ends at 27.3370, num_peaks:216
+write to peaks_30/peaks_11737_12803
+write to peaks_30/peaks_12804_13870
+write to peaks_30/peaks_16005_17071
+write to peaks_30/peaks_17072_18138
+write to peaks_30/peaks_18139_19205
+write to peaks_30/peaks_19206_20272
+peakFinderTask: (21340 - 22407) starts from 27.0217, ends at 27.3477, num_peaks:237
+write to peaks_30/peaks_21340_22406
+peakFinderTask: (22407 - 23474) starts from 27.0268, ends at 27.3497, num_peaks:217
+write to peaks_30/peaks_22407_23473
+peakFinderTask: (20273 - 21340) starts from 27.0198, ends at 27.3503, num_peaks:212
+write to peaks_30/peaks_20273_21339
+peakFinderTask: (24541 - 25608) starts from 27.0542, ends at 27.3829, num_peaks:219
+write to peaks_30/peaks_24541_25607
+peakFinderTask: (25608 - 26675) starts from 27.0621, ends at 27.3882, num_peaks:205
+write to peaks_30/peaks_25608_26674
+peakFinderTask: (27742 - 28809) starts from 27.0683, ends at 27.3920, num_peaks:221
+write to peaks_30/peaks_27742_28808
+peakFinderTask: (28809 - 29876) starts from 27.0840, ends at 27.4114, num_peaks:234
+write to peaks_30/peaks_28809_29875
+peakFinderTask: (23474 - 24541) starts from 27.0313, ends at 27.4164, num_peaks:201
+write to peaks_30/peaks_23474_24540
+peakFinderTask: (30943 - 32000) starts from 27.1197, ends at 27.4313, num_peaks:0
+peakFinderTask: (26675 - 27742) starts from 27.0628, ends at 27.4314, num_peaks:202
+write to peaks_30/peaks_30943_31999
+write to peaks_30/peaks_26675_27741
+peakFinderTask: (29876 - 30943) starts from 27.1095, ends at 27.4418, num_peaks:216
+write to peaks_30/peaks_29876_30942
+
+------------------------------------------------------------
+Sender: LSF System <lsf@psana1606.pcdsn>
+Subject: Job 68714: <LAUNCHER='mpirun --bind-to none -np 2 -npernode 1' python /reg/neh/home/zhenglin/legion/language/regent.py peakFinder.rg -p 30 -ll:csize 40000 -ll:cpu 15> in cluster <slac> Done
+
+Job <LAUNCHER='mpirun --bind-to none -np 2 -npernode 1' python /reg/neh/home/zhenglin/legion/language/regent.py peakFinder.rg -p 30 -ll:csize 40000 -ll:cpu 15> was submitted from host <psanaphi110.pcdsn> by user <zhenglin> in cluster <slac>.
+Job was executed on host(s) <16*psana1606>, in queue <psfehprioq>, as user <zhenglin> in cluster <slac>.
+                            <16*psana1614>
+</reg/neh/home/zhenglin> was used as the home directory.
+</reg/neh/home/zhenglin/Code/peakFinder> was used as the working directory.
+Started at Tue Feb 14 23:52:19 2017
+Results reported on Tue Feb 14 23:52:59 2017
+Cannot open your job file: /reg/neh/home/zhenglin/.lsbatch/1487145138.68714
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   239.04 sec.
+    Max Memory :                                 27163 MB
+    Average Memory :                             27163.00 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   37 sec.
+    Turnaround time :                            41 sec.
+
+The output (if any) is above this job summary.
+

@@ -85,6 +85,7 @@ do
   var WIDTH = data.bounds.hi.x + 1
   var idx_x : int[BUFFER_SIZE]
   var idx_y : int[BUFFER_SIZE]
+  var num_peaks = 0
   -- c.printf("height:%d,width:%d\n",HEIGHT,WIDTH)
   -- var r_conmap = region(ispace(int2d, {WIDTH,HEIGHT}), uint32)
   -- for p_i in is do
@@ -207,6 +208,7 @@ do
                 add_point_success = true
                 -- c.printf("peaks[{p_i, shot_count, 0}] = peak\n")
                 shot_count += 1
+                num_peaks += 1
               end
             else
               for i = 0, pix_counter do
@@ -220,7 +222,7 @@ do
 		end
 	end
 	var ts_stop = c.legion_get_current_time_in_micros()
-  c.printf("peakFinderTask: (%d - %d) starts from %.4f, ends at %.4f\n", data.bounds.lo.z, data.bounds.hi.z + 1, (ts_start) * 1e-6, (ts_stop) * 1e-6)
+  c.printf("peakFinderTask: (%d - %d) starts from %.4f, ends at %.4f, num_peaks:%d\n", data.bounds.lo.z, data.bounds.hi.z + 1, (ts_start) * 1e-6, (ts_stop) * 1e-6, num_peaks)
   -- c.printf("data.bounds.lo.z:%d, data.bounds.hi.z:%d, peaks.bounds.lo.z:%d, peaks.bounds.hi.z:%d, equal:%d\n", data.bounds.lo.z, data.bounds.hi.z, peaks.bounds.lo.z, peaks.bounds.hi.z, 
   --     (data.bounds.lo.z == peaks.bounds.lo.z) and (data.bounds.hi.z == peaks.bounds.hi.z))
 	return 0
