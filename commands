@@ -1,1 +1,0 @@
-bsub -q psfehq -n 32 -o log.txt  "LAUNCHER='mpirun --bind-to none -np 2 -npernode 1' python /reg/neh/home/zhenglin/legion/language/regent.py circuit.rg"
