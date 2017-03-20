@@ -1,3 +1,6 @@
 *.o
 */bin/
 */peakFinder
+*.png
+CUDA_v2/peaks.txt
+CUDA_v2/peaks.img
